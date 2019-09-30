@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1035258571229-cuqnjerb1l82llg4ra1p4k1gh3tqhjlu.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://budgetlist-c7eff.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1035258571229</string>
+    <string name="google_api_key" translatable="false">AIzaSyBpFBw0MoINK5b6sWVbl56e2O2gsjmY8GU</string>
+    <string name="google_app_id" translatable="false">1:1035258571229:android:bb0da7ff4229c2934aee34</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBpFBw0MoINK5b6sWVbl56e2O2gsjmY8GU</string>
+    <string name="google_storage_bucket" translatable="false">budgetlist-c7eff.appspot.com</string>
+    <string name="project_id" translatable="false">budgetlist-c7eff</string>
+</resources>
