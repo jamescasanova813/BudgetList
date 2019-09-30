@@ -22,6 +22,5 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         assertEquals("com.example.budgetlist", appContext.getPackageName());
-
     }
 }
