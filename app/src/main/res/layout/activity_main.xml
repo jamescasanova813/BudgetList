@@ -64,15 +64,18 @@
 
     <TextView
         android:id="@+id/budgetList"
-        android:layout_width="252dp"
-        android:layout_height="59dp"
+        android:layout_width="262dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/anton"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="#33FF8D"
         app:layout_constraintBottom_toTopOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.773"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/Email"
@@ -133,7 +136,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
-        tools:srcCompat="@drawable/BudgetList" />
+        app:srcCompat="@drawable/budgetlist"
+        tools:srcCompat="@drawable/budgetlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
