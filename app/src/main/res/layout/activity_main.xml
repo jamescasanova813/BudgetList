@@ -125,14 +125,15 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="196dp"
+        android:layout_height="172dp"
         android:contentDescription="@android:string/untitled"
         app:layout_constraintBottom_toTopOf="@+id/budgetList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        tools:srcCompat="@drawable/BudgetList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
