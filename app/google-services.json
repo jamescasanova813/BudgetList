@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1035258571229-t4ge716douqb3kgtbtelt0tf209k5gdl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.budgetlist",
+            "certificate_hash": "ac7dc0ed79632f4c731c6ad81aa91d972bef6d75"
+          }
+        },
+        {
           "client_id": "1035258571229-q2c074nfkccf1r375gdku4mrgnhvelaj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
