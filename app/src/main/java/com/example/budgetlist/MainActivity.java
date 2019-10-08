@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         createAccount.setText(createaccount);
         forgotPassword.setText(forgotpassword);
 
+        // testing home page
+       // homebutton.setText(homebutton);
+
         final TextView emailText = findViewById(R.id.EmailEditText);
         final TextView passwordText = findViewById(R.id.PasswordEditText);
 
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 String pass = passwordText.getText().toString();
 
                 CheckEmail(userEmail, pass);
+                startActivity(new Intent(MainActivity.this, Home.class));
             }
         });
     }
