@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button createAccount = findViewById(R.id.CreateAccount);
         TextView forgotPassword = findViewById(R.id.ForgotPassword);
         database = FirebaseDatabase.getInstance().getReference();
+        Button retailerLoginAct_ = findViewById(R.id.RetailerLoginAct_);
 
         String email = "Email:";
         String password = "Password:";
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         String submitbutton = "Submit";
         String createaccount = "Create Account";
         String forgotpassword = "Forgot Password";
-
+        String retailerloginact_ = "Retailers";
 
         Email.setText(email);
         Password.setText(password);
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setText(submitbutton);
         createAccount.setText(createaccount);
         forgotPassword.setText(forgotpassword);
+        retailerLoginAct_.setText(retailerloginact_);
 
         // testing home page
        // homebutton.setText(homebutton);
@@ -71,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
                 CheckEmail(userEmail, pass);
                 startActivity(new Intent(MainActivity.this, Home.class));
+            }
+        });
+
+        retailerLoginAct_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RetailerLoginActivity.class));
             }
         });
     }

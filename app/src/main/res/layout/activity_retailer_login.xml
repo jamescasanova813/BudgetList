@@ -8,31 +8,49 @@
     android:contentDescription="@android:string/untitled"
     tools:context=".RetailerLoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="196dp"
-        android:layout_height="172dp"
-        android:contentDescription="@android:string/untitled"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/RetailerSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136"
-        app:srcCompat="@drawable/budgetlist" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerPassword" />
 
-    <TextView
-        android:id="@+id/RetailerLoginBanner"
-        android:layout_width="359dp"
-        android:layout_height="71dp"
-        android:fontFamily="@font/anton"
-        android:text="Retailer Login"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+    <Button
+        android:id="@+id/RetailerCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerForgotPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RetailerSubmitButton" />
+
+    <Button
+        android:id="@+id/RetailerForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124dp"
+        android:text="Forgot Password"
+        app:layout_constraintBottom_toTopOf="@+id/ShopperLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RetailerCreateAccount" />
+
+    <Button
+        android:id="@+id/ShopperLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shopper Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerForgotPassword"
+        app:layout_constraintVertical_bias="0.892" />
 
     <EditText
         android:id="@+id/RetailerEmail"
@@ -60,43 +78,29 @@
         app:layout_constraintTop_toBottomOf="@+id/RetailerEmail"
         app:layout_constraintVertical_bias="0.087" />
 
-    <Button
-        android:id="@+id/RetailerSubmitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        app:layout_constraintBottom_toTopOf="@+id/RetailerCreateAccount"
-        app:layout_constraintTop_toBottomOf="@+id/RetailerPassword"
-        tools:layout_editor_absoluteX="160dp" />
-
-    <Button
-        android:id="@+id/RetailerCreateAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_account"
-        app:layout_constraintBottom_toTopOf="@+id/RetailerForgotPassword"
-        app:layout_constraintTop_toBottomOf="@+id/RetailerSubmitButton"
-        tools:layout_editor_absoluteX="130dp" />
-
-    <Button
-        android:id="@+id/RetailerForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="124dp"
-        android:text="Forgot Password"
-        app:layout_constraintBottom_toTopOf="@+id/ShopperLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RetailerCreateAccount" />
-
-    <Button
-        android:id="@+id/ShopperLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Shopper Login"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="196dp"
+        android:layout_height="172dp"
+        android:contentDescription="@android:string/untitled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RetailerForgotPassword"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.136"
+        app:srcCompat="@drawable/budgetlist" />
+
+    <TextView
+        android:id="@+id/RetailerLoginBanner"
+        android:layout_width="359dp"
+        android:layout_height="71dp"
+        android:fontFamily="@font/anton"
+        android:text="Retailer Login"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.031" />
 </androidx.constraintlayout.widget.ConstraintLayout>

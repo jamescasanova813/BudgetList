@@ -10,16 +10,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerLastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText2">
+        app:layout_constraintTop_toBottomOf="@+id/RetailerFirstName">
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText2"
+        android:id="@+id/RetailerFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/first_name"
@@ -29,7 +29,7 @@
         android:textColorLink="#33FF8D"
         android:textStyle="bold"
         android:fontFamily="@font/anton"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerLastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,16 +38,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText3"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText">
+        app:layout_constraintTop_toBottomOf="@+id/RetailerLastName">
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/RetailerLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/last_name"
@@ -57,25 +57,25 @@
         android:textColorLink="#33FF8D"
         android:textStyle="bold"
         android:fontFamily="@font/anton"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText3"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText2" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerFirstName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText4"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText4">
+        app:layout_constraintTop_toBottomOf="@+id/RetailerPassword">
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText3"
+        android:id="@+id/RetailerEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Email"
@@ -85,11 +85,11 @@
         android:textColorLink="#33FF8D"
         android:textStyle="bold"
         android:fontFamily="@font/anton"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText4"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerLastName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
@@ -98,12 +98,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText4">
+        app:layout_constraintTop_toBottomOf="@+id/RetailerPassword">
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText4"
+        android:id="@+id/RetailerPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Password"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText3" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerEmail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
@@ -144,7 +144,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText4" />
+        app:layout_constraintTop_toBottomOf="@+id/RetailerPassword" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"
@@ -167,14 +167,14 @@
         android:textColorLink="#33FF8D"
         android:textStyle="bold"
         android:fontFamily="@font/anton"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/RetailerCreateAccountButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RetailerReEnterPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/RetailerCreateAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
