@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SubmitButton"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.491" />
 
     <EditText
         android:id="@+id/PasswordEditText"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintVertical_bias="0.594" />
 
     <EditText
         android:id="@+id/EmailEditText"
@@ -60,7 +60,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswordEditText"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/budgetList"
@@ -98,11 +98,11 @@
         android:textColor="#33FF8D"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/PasswordEditText"
+        app:layout_constraintHorizontal_bias="0.104"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.595" />
 
     <Button
         android:id="@+id/CreateAccount"
@@ -117,7 +117,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SubmitButton"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -138,5 +138,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/budgetlist"
         tools:srcCompat="@drawable/budgetlist" />
+
+    <Button
+        android:id="@+id/RetailerLoginAct_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ForgotPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

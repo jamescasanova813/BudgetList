@@ -5,17 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccount extends AppCompatActivity {
@@ -24,7 +22,9 @@ public class CreateAccount extends AppCompatActivity {
     TextView lastName;
     TextView emailText;
     TextView passwordText;
+    TextView ReEnterPassword;
     DatabaseReference database;
+    TextView passwordHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,20 @@ public class CreateAccount extends AppCompatActivity {
         lastName = findViewById(R.id.LastName);
         emailText = findViewById(R.id.Email);
         passwordText = findViewById(R.id.Password);
+        passwordHint = findViewById(R.id.PasswordHint);
+        ReEnterPassword = findViewById(R.id.ReEnterPassword);
         Button createAccount = findViewById(R.id.createAccountButton);
+
+
+        String enterpassword = "Enter Password";
+        String enteremail = "Enter Email";
+        String reenterpassword = "Re-Enter Password";
+        String passwordhint = "Password Hint";
+        passwordText.setHint(enterpassword);
+        emailText.setHint(enteremail);
+        ReEnterPassword.setHint(reenterpassword);
+        passwordHint.setHint(passwordhint);
+
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,10 +87,7 @@ public class CreateAccount extends AppCompatActivity {
         if(emailText.getText().toString().isEmpty()){
             return false;
         }
-        if(passwordText.getText().toString().isEmpty()){
-            return false;
-        }
-        return true;
+        return !passwordText.getText().toString().isEmpty();
     }
 
     private void CheckUsername(final String email){
