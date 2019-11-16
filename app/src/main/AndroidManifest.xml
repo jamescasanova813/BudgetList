@@ -17,9 +17,6 @@
         <activity android:name=".RetailerCreateAccountActivity"
             android:configChanges="orientation"
             android:screenOrientation = "portrait"/>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
         <activity android:name=".Home"
             android:configChanges="orientation"
             android:screenOrientation = "portrait"/>
