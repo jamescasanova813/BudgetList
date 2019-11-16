@@ -26,13 +26,13 @@ public class RetailerLoginActivity extends AppCompatActivity {
         final TextView retailerEmail = findViewById(R.id.RetailerEmail);
         final TextView retailerPassword = findViewById(R.id.RetailerPassword);
         TextView retailerLoginBanner = findViewById(R.id.RetailerLoginBanner);
-        TextView retailerSubmitButton = findViewById(R.id.RetailerSubmitButton);
+        Button retailerSubmitButton = findViewById(R.id.RetailerSubmitButton);
         Button retailerCreateAccount = findViewById(R.id.RetailerCreateAccount);
         TextView retailerForgotPassword = findViewById(R.id.RetailerForgotPassword);
         database = FirebaseDatabase.getInstance().getReference();
         Button shopperLogin = findViewById(R.id.ShopperLogin);
 
-        String retaileremail = "Email:";
+        final String retaileremail = "Email:";
         String retailerpassword = "Password:";
         String retailerloginbanner = "Retailer Login";
         String retailersubmitbutton = "Submit";
@@ -40,8 +40,8 @@ public class RetailerLoginActivity extends AppCompatActivity {
         String retailerforgotpassword = "Forgot Password";
         String shopperlogin = "Shoppers";
 
-        retailerEmail.setText(retaileremail);
-        retailerPassword.setText(retailerpassword);
+        retailerEmail.setHint(retaileremail);
+        retailerPassword.setHint(retailerpassword);
         retailerLoginBanner.setText(retailerloginbanner);
         retailerSubmitButton.setText(retailersubmitbutton);
         retailerCreateAccount.setText(retailercreateaccount);
@@ -65,13 +65,12 @@ public class RetailerLoginActivity extends AppCompatActivity {
         retailerSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String retailerEmail = emailText.getText().toString();
-                retailerEmail = retailerEmail.replaceAll("\\.", ",");
-                Log.d("msg", retailerEmail);
-                String pass = passwordText.getText().toString();
+                String retEmail = retailerEmail.getText().toString();
+                retEmail = retEmail.replaceAll("\\.", ",");
+                String pass = retailerPassword.getText().toString();
 
-                retailerCheckEmail(retailerEmail, pass);
-                startActivity(new Intent(RetailerLoginActivity.this, Home.class)); // Todo: Change to the home to retailer home
+                retailerCheckEmail(retEmail, pass);
+                // Todo: Change to the home to retailer home
             }
         });
 
@@ -108,6 +107,7 @@ public class RetailerLoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("Password").getValue().equals(p)){
                     Log.d("msg", "Login Successful");
+                    startActivity(new Intent(RetailerLoginActivity.this, Home.class));
                 }
                 else{
                     Log.d("msg", "Invalid Password");

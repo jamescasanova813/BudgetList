@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView Email = findViewById(R.id.Email);
         final TextView Password = findViewById(R.id.password);
         TextView budgetList = findViewById(R.id.budgetList);
-        TextView submitButton = findViewById(R.id.SubmitButton);
+        Button submitButton = findViewById(R.id.SubmitButton);
         Button createAccount = findViewById(R.id.CreateAccount);
         TextView forgotPassword = findViewById(R.id.ForgotPassword);
         database = FirebaseDatabase.getInstance().getReference();
