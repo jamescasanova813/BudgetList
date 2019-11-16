@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 String pass = passwordText.getText().toString();
 
                 CheckEmail(userEmail, pass);
-                startActivity(new Intent(MainActivity.this, Home.class));
             }
         });
 
@@ -109,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("Password").getValue().equals(p)){
                     Log.d("msg", "Login Successful");
+                    startActivity(new Intent(MainActivity.this, Home.class));
                 }
                 else{
                     Log.d("msg", "Invalid Password");

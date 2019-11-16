@@ -44,10 +44,10 @@ public class RetailerCreateAccountActivity extends AppCompatActivity {
         String enteremail = "Enter Email";
         String retailerreenterpassword = "Re-Enter Password";
         String retailerpasswordhint = "Password Hint";
-        passwordText.setHint(enterpassword);
-        emailText.setHint(enteremail);
-        retailerReEnterPassword.setHint(retailerreenterpassword);
-        retailerPasswordHint.setHint(retailerpasswordhint);
+//        passwordText.setHint(enterpassword);
+//        emailText.setHint(enteremail);
+//        retailerReEnterPassword.setHint(retailerreenterpassword);
+//        retailerPasswordHint.setHint(retailerpasswordhint);
 
         retailerCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
