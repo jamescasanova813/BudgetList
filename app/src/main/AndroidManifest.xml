@@ -23,6 +23,9 @@
         <activity android:name=".CreateAccount"
             android:configChanges="orientation"
             android:screenOrientation = "portrait"/>
+        <activity android:screenOrientation="portrait"
+                  android:configChanges="orientation"
+                  android:name=".Retailer_Home"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
