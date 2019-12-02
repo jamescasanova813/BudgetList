@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +30,10 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        //Gets the database reference
         database = FirebaseDatabase.getInstance().getReference();
 
+        //Setting the reference variables for each of the UI elements
         firstName = findViewById(R.id.FirstName);
         lastName = findViewById(R.id.LastName);
         emailText = findViewById(R.id.Email);
@@ -41,7 +42,7 @@ public class CreateAccount extends AppCompatActivity {
         ReEnterPassword = findViewById(R.id.ReEnterPassword);
         Button createAccount = findViewById(R.id.createAccountButton);
 
-
+        //Setting the text for the ui elements
         String enterpassword = "Enter Password";
         String enteremail = "Enter Email";
         String reenterpassword = "Re-Enter Password";
@@ -51,10 +52,11 @@ public class CreateAccount extends AppCompatActivity {
         ReEnterPassword.setHint(reenterpassword);
         passwordHint.setHint(passwordhint);
 
-
+        //Sets up the create account button listener
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Firebase can't have periods, and therefore they are replaced with commas
                 String email = emailText.getText().toString();
                 email = email.replaceAll("\\.", ",");
 
@@ -65,6 +67,7 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
+    //Adds the account using user inputted information
     private void AddAccount(String email){
         String fName = firstName.getText().toString();
         String lName = lastName.getText().toString();
@@ -74,9 +77,11 @@ public class CreateAccount extends AppCompatActivity {
         database.child("Users").child(email).child("Last Name").setValue(lName);
         database.child("Users").child(email).child("Password").setValue(password);
 
+        //Changes activities back to the login activity
         startActivity(new Intent(CreateAccount.this, MainActivity.class));
     }
 
+    //Verifies that that none of the text edits are empty
     private boolean ValidInputs(){
         if(firstName.getText().toString().isEmpty()){
             return false;
@@ -90,6 +95,7 @@ public class CreateAccount extends AppCompatActivity {
         return !passwordText.getText().toString().isEmpty();
     }
 
+    //Checks the database to make sure that the email is unique
     private void CheckUsername(final String email){
         database.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

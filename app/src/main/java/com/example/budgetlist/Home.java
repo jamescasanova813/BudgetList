@@ -1,6 +1,5 @@
 package com.example.budgetlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,9 +20,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Sets up the action toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Sets up the navigational drawer, sidebar menu
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -33,6 +34,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //If the current instance fragment is null (first logging in) it sets the shop fragment
+        //as the currently shown fragment
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ShopFragment()).commit();
@@ -40,6 +43,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
+    //Defines what activity will be shown when the user presses the back button
     @Override
     public void onBackPressed(){
         if(drawer.isDrawerOpen(GravityCompat.START)){
@@ -51,6 +55,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     }
 
+    //Holds the logic for when the user presses one of the items in the navigational
+    //sidebar menu.  Changes the fragment with the necessary xml and fragment java file
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){

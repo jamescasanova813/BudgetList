@@ -1,23 +1,21 @@
 package com.example.budgetlist;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShopFragment extends Fragment {
 
@@ -37,38 +38,56 @@ public class ShopFragment extends Fragment {
     EditText editText_shopSearch;
     ListView listView_shopResults;
 
+    //Holds all the items found in the search query
     ArrayList<String> searchItems = new ArrayList<>();
+    //Sets up the adapter to adjust the list view with the found search items
     ArrayAdapter<String> searchAdapter;
 
+    //Holds all the items that the user selected to be in their list
     ArrayList<String> shopList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //Sets the fragment up with the specified fragment xml file
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
+        //Gets the database reference
         database = FirebaseDatabase.getInstance().getReference();
+
+        //Sets up the references for the ui elements
         editText_shopSearch = view.findViewById(R.id.shop_edittext_search);
         listView_shopResults = view.findViewById(R.id.shop_listview_searchresults);
 
+        //Creates a new adapter for the list view
         searchAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchItems);
         listView_shopResults.setAdapter(searchAdapter);
 
+        InitializeShopperList();
+
+        //Sets up the on item click listener for the list view
         listView_shopResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int index, long l) {
+                //Creates a dialog box to make sure the user wants to add it to their list
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Add Item").setMessage("Are you sure you want to add " +
                         searchItems.get(index) + "?");
 
+                //Sets the positive button of the dialog box, and if pressed adds the item
+                //to the shopper list
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        shopList.add(searchItems.get(index));
+                        if(!shopList.contains(searchItems.get(index))){
+                            shopList.add(searchItems.get(index));
+                            SaveItemsToLocalStorage();
+                        }
                     }
                 });
 
+                //Sets the negative button of the dialog box
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -76,13 +95,14 @@ public class ShopFragment extends Fragment {
                     }
                 });
 
+                //Builds and shows the dialog box
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
 
+        //Adds an on text change listener to the edit text for the search query
         editText_shopSearch.addTextChangedListener(new TextWatcher() {
-            boolean ignore = false;
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -90,53 +110,36 @@ public class ShopFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                //Updates the list view when the text changes and updates the adapter
+                if(editText_shopSearch.getText().length() > 0){
+                    searchItems.clear();
+                    PopulateListView(editText_shopSearch.getText().toString());
+                }
+                else{
+                    searchItems.clear();
+                    ((BaseAdapter)listView_shopResults.getAdapter()).notifyDataSetChanged();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (ignore) return;
 
-                ignore = true;
-
-                String s = editable.toString();
-                if (s.length() > 0) {
-                    // The condition checks if the last typed char's ASCII value is equal to 10, which is the new line decimal value
-                    if (((int)(s.charAt(s.length()-1)) == 10)) {
-                        String newStr = s.substring(0, s.length()-1); // Removes the new line character from the string
-                        editText_shopSearch.setText(newStr);
-                        editText_shopSearch.setSelection(editText_shopSearch.length()); // Sets the text cursor to the end of the text
-                    }
-                }
-
-                ignore = false;
-            }
-        });
-
-        editText_shopSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER){
-                    hideKeyboardFrom(getContext(), view);
-                    if(editText_shopSearch.getText().length() > 0){
-                        searchItems.clear();
-                        PopulateListView(editText_shopSearch.getText().toString());
-                    }
-                }
-                return false;
             }
         });
 
         return view;
     }
 
+    //Checks the database to see what products match the users query
     private void PopulateListView(final String itemName){
         database.child("Products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Each item found will be added to the list view
                 for(DataSnapshot item : dataSnapshot.getChildren()){
                     if(item.getKey().toLowerCase().contains(itemName.toLowerCase())){
                         searchItems.add(item.getKey());
+                        ((BaseAdapter)listView_shopResults.getAdapter()).notifyDataSetChanged();
                     }
                 }
             }
@@ -148,8 +151,25 @@ public class ShopFragment extends Fragment {
         });
     }
 
-    public static void hideKeyboardFrom(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    private void SaveItemsToLocalStorage(){
+        Gson gson = new Gson();
+        String json = gson.toJson(shopList);
+        SharedPreferences sharedPreferences = this.getActivity().getPreferences((Context.MODE_PRIVATE));
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("ShoppingItems", json);
+        editor.apply();
+    }
+
+    private void InitializeShopperList(){
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        String json = sharedPreferences.getString("ShoppingItems", "");
+        String[] items = gson.fromJson(json, String[].class);
+
+        if(items != null){
+            for(String i: items){
+                shopList.add(i);
+            }
+        }
     }
 }
