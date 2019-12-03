@@ -75,6 +75,7 @@ public class RetailerLoginActivity extends AppCompatActivity {
                 String pass = retailerPassword.getText().toString();
 
                 retailerCheckEmail(retEmail, pass);
+                startActivity(new Intent(RetailerLoginActivity.this, Retailer_Home.class));
             }
         });
 
@@ -116,7 +117,6 @@ public class RetailerLoginActivity extends AppCompatActivity {
                 //If the password is correct it logs the user in
                 if(dataSnapshot.child("Password").getValue().equals(p)){
                     Log.d("msg", "Login Successful");
-                    startActivity(new Intent(RetailerLoginActivity.this, Home.class));
                 }
                 else{
                     Log.d("msg", "Invalid Password");

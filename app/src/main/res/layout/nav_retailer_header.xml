@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/colorAccent"
+    android:background="@android:color/holo_blue_bright"
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="110dp"
         android:layout_height="90dp"
-        app:srcCompat="@drawable/budgetlist" />
+        android:src="@drawable/budgetlist" />
 
     <TextView
         android:layout_width="112dp"
