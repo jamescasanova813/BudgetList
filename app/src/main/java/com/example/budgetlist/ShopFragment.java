@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,12 +47,12 @@ public class ShopFragment extends Fragment {
     ArrayAdapter<String> searchAdapter;
 
     //Holds all the items that the user selected to be in their list
-    ArrayList<String> shopList = new ArrayList<>();
+    ArrayList<MyListItem> shopList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        Log.d("Err", "Shop Opened");
         //Sets the fragment up with the specified fragment xml file
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
@@ -80,8 +83,21 @@ public class ShopFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!shopList.contains(searchItems.get(index))){
-                            shopList.add(searchItems.get(index));
+                        boolean foundItem = false;
+
+                        if(shopList != null){
+                            for(MyListItem item : shopList){
+                                if(item.getItemName().equals(searchItems.get(index))){
+                                    foundItem = true;
+                                }
+                            }
+                        }
+                        else{
+                            shopList = new ArrayList<>();
+                        }
+
+                        if(!foundItem){
+                            shopList.add(new MyListItem(searchItems.get(index)));
                             SaveItemsToLocalStorage();
                         }
                     }
@@ -164,12 +180,8 @@ public class ShopFragment extends Fragment {
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = this.getActivity().getPreferences(Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("ShoppingItems", "");
-        String[] items = gson.fromJson(json, String[].class);
 
-        if(items != null){
-            for(String i: items){
-                shopList.add(i);
-            }
-        }
+        Type type = new TypeToken<ArrayList<MyListItem>>(){}.getType();
+        shopList = gson.fromJson(json, type);
     }
 }

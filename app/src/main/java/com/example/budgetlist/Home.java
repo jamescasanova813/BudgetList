@@ -76,6 +76,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
                 break;
+            case R.id.nav_stops:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CalculationFragment()).commit();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return false;
