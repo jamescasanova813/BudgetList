@@ -1,5 +1,6 @@
 package com.example.budgetlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -79,6 +80,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_stops:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CalculationFragment()).commit();
+                break;
+            case R.id.nav_logout:
+                Intent intent = new Intent(Home.this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

@@ -11,28 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RetailerLoginActivity"
+        <activity android:name=".ResetPassword"></activity>
+        <activity
+            android:name=".RetailerLoginActivity"
             android:configChanges="orientation"
-            android:screenOrientation = "portrait">
-
-        </activity>
-        <activity android:name=".RetailerCreateAccountActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".RetailerCreateAccountActivity"
             android:configChanges="orientation"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".Home"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Home"
             android:configChanges="orientation"
-            android:screenOrientation = "portrait"/>
-        <activity android:name=".CreateAccount"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateAccount"
             android:configChanges="orientation"
-            android:screenOrientation = "portrait"/>
-        <activity android:screenOrientation="portrait"
-                  android:configChanges="orientation"
-                  android:name=".Retailer_Home"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Retailer_Home"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation"
-            android:screenOrientation = "portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

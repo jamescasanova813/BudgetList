@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +25,8 @@ public class CreateAccount extends AppCompatActivity {
     TextView passwordText;
     TextView ReEnterPassword;
     DatabaseReference database;
-    TextView passwordHint;
+    TextView securityQuestion;
+    TextView securityAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +41,10 @@ public class CreateAccount extends AppCompatActivity {
         lastName = findViewById(R.id.LastName);
         emailText = findViewById(R.id.Email);
         passwordText = findViewById(R.id.Password);
-        passwordHint = findViewById(R.id.PasswordHint);
+        securityQuestion = findViewById(R.id.SecurityQuestion);
+        securityAnswer = findViewById(R.id.SecurityAnswer);
         ReEnterPassword = findViewById(R.id.ReEnterPassword);
         Button createAccount = findViewById(R.id.createAccountButton);
-
-        //Setting the text for the ui elements
-        String enterpassword = "Enter Password";
-        String enteremail = "Enter Email";
-        String reenterpassword = "Re-Enter Password";
-        String passwordhint = "Password Hint";
-        passwordText.setHint(enterpassword);
-        emailText.setHint(enteremail);
-        ReEnterPassword.setHint(reenterpassword);
-        passwordHint.setHint(passwordhint);
 
         //Sets up the create account button listener
         createAccount.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +70,8 @@ public class CreateAccount extends AppCompatActivity {
         database.child("Users").child(email).child("First Name").setValue(fName);
         database.child("Users").child(email).child("Last Name").setValue(lName);
         database.child("Users").child(email).child("Password").setValue(password);
+        database.child("Users").child(email).child("SecurityQuestion").setValue(securityQuestion.getText().toString());
+        database.child("Users").child(email).child("SecurityAnswer").setValue(securityAnswer.getText().toString());
 
         //Changes activities back to the login activity
         startActivity(new Intent(CreateAccount.this, MainActivity.class));
@@ -84,15 +80,43 @@ public class CreateAccount extends AppCompatActivity {
     //Verifies that that none of the text edits are empty
     private boolean ValidInputs(){
         if(firstName.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
             return false;
         }
         if(lastName.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
             return false;
         }
         if(emailText.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
             return false;
         }
-        return !passwordText.getText().toString().isEmpty();
+        if(securityQuestion.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
+            return false;
+        }
+        if(securityAnswer.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
+            return false;
+        }
+        if(passwordText.getText().toString().isEmpty()){
+            InvalidInputs("Empty");
+            return false;
+        }
+        if(!passwordText.getText().toString().equals(ReEnterPassword.getText().toString())){
+            InvalidInputs("Password");
+            return false;
+        }
+        return true;
+    }
+
+    private void InvalidInputs(String error){
+        if(error.equals("Password")){
+            Toast.makeText(this, "Passwords Don't Match", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this, "Please Fill Out All Fields", Toast.LENGTH_LONG).show();
+        }
     }
 
     //Checks the database to make sure that the email is unique
@@ -104,7 +128,7 @@ public class CreateAccount extends AppCompatActivity {
                     AddAccount(email);
                 }
                 else{
-                    //Email found
+                    Toast.makeText(CreateAccount.this, "Email Already Exists", Toast.LENGTH_LONG).show();
                 }
             }
 

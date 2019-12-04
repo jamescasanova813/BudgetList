@@ -102,20 +102,24 @@ public class MyItemsFragment extends Fragment {
     }
 
     private void GetItemsLocalStorage(){
+        SharedPreferences preferences = getActivity().getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        String email = preferences.getString("Email", "");
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        String json = sharedPreferences.getString("ShoppingItems", "");
+        String json = sharedPreferences.getString("ShoppingItems" + email, "");
 
         Type type = new TypeToken<ArrayList<MyListItem>>(){}.getType();
         allListItems = gson.fromJson(json, type);
     }
 
     private void UpdateItemsLocalStorage(){
+        SharedPreferences preferences = getActivity().getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        String email = preferences.getString("Email", "");
         Gson gson = new Gson();
         String json = gson.toJson(allListItems);
         SharedPreferences sharedPreferences = this.getActivity().getPreferences((Context.MODE_PRIVATE));
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("ShoppingItems", json);
+        editor.putString("ShoppingItems" + email, json);
         editor.apply();
     }
 }

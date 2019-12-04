@@ -2,8 +2,11 @@ package com.example.budgetlist;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         TextView budgetList = findViewById(R.id.budgetList);
         Button submitButton = findViewById(R.id.SubmitButton);
         Button createAccount = findViewById(R.id.CreateAccount);
-        TextView forgotPassword = findViewById(R.id.ForgotPassword);
+        Button forgotPassword = findViewById(R.id.ForgotPassword);
         Button retailerLoginAct_ = findViewById(R.id.RetailerLoginAct_);
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -87,6 +90,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, RetailerLoginActivity.class));
             }
         });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ResetPassword.class);
+                intent.putExtra("FromSettings", false);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void setDefaults(String key, String value) {
+        SharedPreferences preferences = getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     //Checks in the database whether the email exists
@@ -119,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("Password").getValue().equals(p)){
                     Log.d("msg", "Login Successful");
+                    setDefaults("Email", e);
                     startActivity(new Intent(MainActivity.this, Home.class));
                 }
                 else{

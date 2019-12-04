@@ -151,12 +151,19 @@ public class ShopFragment extends Fragment {
         database.child("Products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean foundItem = false;
                 //Each item found will be added to the list view
                 for(DataSnapshot item : dataSnapshot.getChildren()){
                     if(item.getKey().toLowerCase().contains(itemName.toLowerCase())){
                         searchItems.add(item.getKey());
                         ((BaseAdapter)listView_shopResults.getAdapter()).notifyDataSetChanged();
+                        foundItem = true;
                     }
+                }
+
+                if(!foundItem){
+                    searchItems.clear();
+                    ((BaseAdapter)listView_shopResults.getAdapter()).notifyDataSetChanged();
                 }
             }
 
@@ -168,18 +175,22 @@ public class ShopFragment extends Fragment {
     }
 
     private void SaveItemsToLocalStorage(){
+        SharedPreferences preferences = getActivity().getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        String email = preferences.getString("Email", "");
         Gson gson = new Gson();
         String json = gson.toJson(shopList);
         SharedPreferences sharedPreferences = this.getActivity().getPreferences((Context.MODE_PRIVATE));
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("ShoppingItems", json);
+        editor.putString("ShoppingItems" + email, json);
         editor.apply();
     }
 
     private void InitializeShopperList(){
+        SharedPreferences preferences = getActivity().getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        String email = preferences.getString("Email", "");
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        String json = sharedPreferences.getString("ShoppingItems", "");
+        String json = sharedPreferences.getString("ShoppingItems" + email, "");
 
         Type type = new TypeToken<ArrayList<MyListItem>>(){}.getType();
         shopList = gson.fromJson(json, type);

@@ -86,8 +86,10 @@ public class CalculationFragment extends Fragment {
         mListView = view.findViewById(R.id.stop_listview);
 
         ArrayList<String> listItems = new ArrayList<>();
-        for(MyListItem item : allItems){
-            listItems.add(item.getItemName() + " - Qty: " + item.getQuantity());
+        if(allItems != null) {
+            for (MyListItem item : allItems) {
+                listItems.add(item.getItemName() + " - Qty: " + item.getQuantity());
+            }
         }
 
         shopItems = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, listItems);
@@ -136,9 +138,12 @@ public class CalculationFragment extends Fragment {
     }
 
     private void GetItemsLocalStorage(){
+        SharedPreferences preferences = getActivity().getSharedPreferences("SavedEmail", Context.MODE_PRIVATE);
+        String email = preferences.getString("Email", "");
+
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        String json = sharedPreferences.getString("ShoppingItems", "");
+        String json = sharedPreferences.getString("ShoppingItems" + email, "");
 
         Type type = new TypeToken<ArrayList<MyListItem>>(){}.getType();
         allItems = gson.fromJson(json, type);
